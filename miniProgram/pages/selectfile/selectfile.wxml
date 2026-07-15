@@ -1,0 +1,108 @@
+<view class="page-shell {{accentClass}}">
+  <view class="intro-card">
+    <view class="intro-top-row">
+      <text class="type-badge">{{typeBadge}}</text>
+      <text class="step-label">STEP 2 / 2</text>
+    </view>
+    <text class="intro-title">{{typeName}}</text>
+    <text class="intro-desc">{{typeDescription}}</text>
+  </view>
+
+  <view class="preview-section">
+    <view class="preview-head">
+      <text class="preview-title">内容预览</text>
+      <view class="status-chip status-{{stage}}">
+        <view class="status-point"></view>
+        <text>{{statusText}}</text>
+      </view>
+    </view>
+
+    <view class="preview-card">
+      <view class="preview-glow"></view>
+      <view class="screen-shell">
+        <view class="screen-bezel">
+          <view class="screen-content">
+            <image
+              wx:if="{{url && type != 2}}"
+              class="preview-media"
+              src="{{url}}"
+              mode="aspectFill"
+            ></image>
+            <video
+              wx:elif="{{url && type == 2}}"
+              class="preview-media"
+              src="{{url}}"
+              controls="{{true}}"
+              muted="{{true}}"
+              object-fit="cover"
+            ></video>
+            <view wx:else class="preview-placeholder">
+              <view class="placeholder-icon">
+                <view class="placeholder-line"></view>
+                <view class="placeholder-dot"></view>
+              </view>
+              <text class="placeholder-title">还没有选择内容</text>
+              <text class="placeholder-desc">选择后会在这里显示设备端效果</text>
+            </view>
+          </view>
+          <view class="screen-indicator"></view>
+        </view>
+      </view>
+
+      <view class="preview-caption">
+        <view class="caption-dot"></view>
+        <text>圆形区域为设备可见范围，请将主体放在画面中心。</text>
+      </view>
+    </view>
+  </view>
+
+  <button
+    class="file-picker"
+    hover-class="file-picker-pressed"
+    disabled="{{isUploadingFile || isSending}}"
+    bindtap="chooseSingleFile"
+  >
+    <view class="picker-icon">
+      <view class="picker-plus-one"></view>
+      <view class="picker-plus-two"></view>
+    </view>
+    <view class="picker-copy">
+      <text class="picker-title">{{url ? '重新选择内容' : chooseText}}</text>
+      <text class="picker-desc">可从相册选择，也可以直接拍摄</text>
+    </view>
+    <view class="picker-arrow"></view>
+  </button>
+
+  <!-- <view class="spec-card">
+    <view class="spec-item">
+      <text class="spec-value">368 × 368</text>
+      <text class="spec-label">显示分辨率</text>
+    </view>
+    <view class="spec-divider"></view>
+    <view class="spec-item">
+      <text class="spec-value">云端处理</text>
+      <text class="spec-label">格式转换</text>
+    </view>
+    <view class="spec-divider"></view>
+    <view class="spec-item">
+      <text class="spec-value">BLE</text>
+      <text class="spec-label">指令下发</text>
+    </view>
+  </view> -->
+
+  <view class="action-area">
+    <button
+      class="primary-button {{(!url || isUploadingFile || isSending) ? 'primary-button-disabled' : ''}}"
+      hover-class="primary-button-pressed"
+      disabled="{{!url || isUploadingFile || isSending}}"
+      bindtap="sendToDevice"
+    >
+      <view wx:if="{{isSending}}" class="button-spinner"></view>
+      <text>{{isSending ? '设备处理中' : (isUploadingFile ? '文件处理中' : '发送到设备')}}</text>
+      <view wx:if="{{!isSending && !isUploadingFile}}" class="button-arrow"></view>
+    </button>
+    <text class="action-tip">发送过程可能需要一段时间，请保持设备联网并停留在本页面。</text>
+  </view>
+
+  <view class="safe-bottom"></view>
+</view>

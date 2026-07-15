@@ -1,0 +1,172 @@
+<view class="page-shell">
+  <view class="device-banner">
+    <view class="device-banner-orb"></view>
+    <view class="device-status-row">
+      <view class="online-chip">
+        <view class="online-point"></view>
+        <text>设备已连接</text>
+      </view>
+      <view class="banner-device-icon">
+        <view class="banner-screen"></view>
+        <view class="banner-button"></view>
+      </view>
+    </view>
+    <text class="banner-title">为设备更新内容</text>
+    <text class="banner-desc">选择内容类型，预览确认后发送到设备。</text>
+    <view class="device-id-box">
+      <text class="device-id-label">设备标识</text>
+      <text class="device-id-value">{{mac || '--'}}</text>
+    </view>
+  </view>
+
+  <view class="content-section">
+    <view class="section-heading">
+      <view class="section-copy">
+        <text class="section-title">选择内容类型</text>
+        <text class="section-desc">支持单图、GIF 动图和视频</text>
+      </view>
+      <text class="step-label">STEP 1</text>
+    </view>
+
+    <view class="type-grid">
+      <view class="type-card type-card-wide" hover-class="type-card-pressed" bindtap="goToUpload" data-type="0">
+        <image class="type-background" src="/assets/img/00002.png" mode="aspectFill"></image>
+        <view class="type-overlay"></view>
+        <view class="type-card-content">
+          <view class="type-icon type-icon-image">IMG</view>
+          <view class="type-copy">
+            <text class="type-title">单图显示</text>
+            <text class="type-desc">自动裁剪并压缩为 368 × 368</text>
+          </view>
+          <view class="type-arrow"></view>
+        </view>
+      </view>
+
+      <view class="type-row">
+        <view class="type-card type-card-half type-card-gif" hover-class="type-card-pressed" bindtap="goToUpload" data-type="1">
+          <image class="type-background" src="/assets/img/00003.png" mode="aspectFill"></image>
+          <view class="type-overlay type-overlay-light"></view>
+          <view class="type-card-column">
+            <view class="type-icon type-icon-gif">GIF</view>
+            <text class="type-title">动图</text>
+            <text class="type-desc">保留动态效果</text>
+            <view class="round-arrow"><view class="type-arrow"></view></view>
+          </view>
+        </view>
+
+        <view class="type-card type-card-half type-card-video" hover-class="type-card-pressed" bindtap="goToUpload" data-type="2">
+          <image class="type-background" src="/assets/img/00001.png" mode="aspectFill"></image>
+          <view class="type-overlay type-overlay-light"></view>
+          <view class="type-card-column">
+            <view class="type-icon type-icon-video">▶</view>
+            <text class="type-title">视频</text>
+            <text class="type-desc">最长选择 60 秒</text>
+            <view class="round-arrow"><view class="type-arrow"></view></view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="history-section">
+    <view class="section-heading history-heading">
+      <view class="section-copy">
+        <view class="history-title-row">
+          <text class="section-title">历史记录</text>
+          <text class="history-count">{{history.length}}</text>
+        </view>
+        <text class="section-desc">点击记录可再次使用或删除</text>
+      </view>
+      <text class="step-label">RECENT</text>
+    </view>
+
+    <scroll-view wx:if="{{history.length}}" class="history-scroll" scroll-x="{{true}}" show-scrollbar="{{false}}">
+      <view class="history-row">
+        <view
+          wx:for="{{history}}"
+          wx:key="id"
+          class="history-card"
+          hover-class="history-card-pressed"
+          bindtap="openHistoryMenu"
+          data-index="{{index}}"
+        >
+          <view class="history-preview">
+            <image wx:if="{{item.type != 2}}" class="history-media" src="{{item.fullUrl}}" mode="aspectFill"></image>
+            <video
+              wx:else
+              class="history-media"
+              src="{{item.fullUrl}}"
+              controls="{{false}}"
+              muted="{{true}}"
+              show-center-play-btn="{{false}}"
+              object-fit="cover"
+            ></video>
+            <view wx:if="{{item.type == 2}}" class="video-play">▶</view>
+            <text class="history-type">{{item.typeName}}</text>
+          </view>
+          <view class="history-meta">
+            <text class="history-name">{{item.typeName}}内容</text>
+            <text class="history-more">•••</text>
+          </view>
+        </view>
+        <view class="history-tail-space"></view>
+      </view>
+    </scroll-view>
+
+    <view wx:elif="{{loadingHistory}}" class="history-loading">
+      <view class="history-loading-spinner"></view>
+      <text>正在读取历史记录</text>
+    </view>
+
+    <view wx:else class="history-empty">
+      <view class="history-empty-icon">
+        <view class="empty-picture-line"></view>
+        <view class="empty-picture-dot"></view>
+      </view>
+      <view class="history-empty-copy">
+        <text class="history-empty-title">暂无历史内容</text>
+        <text class="history-empty-desc">完成一次发送后，记录会显示在这里。</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="safe-bottom"></view>
+</view>
+
+<view wx:if="{{visible}}" class="sheet-layer">
+  <view class="sheet-mask" bindtap="closeHistoryMenu"></view>
+  <view class="bottom-sheet" catchtap="preventBubble">
+    <view class="sheet-handle"></view>
+    <view wx:if="{{selectedItem}}" class="sheet-preview-row">
+      <view class="sheet-preview">
+        <image wx:if="{{selectedItem.type != 2}}" class="sheet-media" src="{{selectedItem.fullUrl}}" mode="aspectFill"></image>
+        <view wx:else class="sheet-video-placeholder">▶</view>
+      </view>
+      <view class="sheet-copy">
+        <text class="sheet-title">{{selectedItem.typeName}}内容</text>
+        <text class="sheet-desc">选择下一步操作</text>
+      </view>
+    </view>
+
+    <button class="sheet-action sheet-action-primary" hover-class="sheet-action-pressed" bindtap="useHistoryItem">
+      <view class="sheet-action-icon action-use">↗</view>
+      <view class="sheet-action-copy">
+        <text class="sheet-action-title">再次使用</text>
+        <text class="sheet-action-desc">预览并重新发送到设备</text>
+      </view>
+      <view class="sheet-action-arrow"></view>
+    </button>
+
+    <button class="sheet-action sheet-action-danger" hover-class="sheet-action-pressed" bindtap="deleteHistoryItem">
+      <view class="sheet-action-icon action-delete">×</view>
+      <view class="sheet-action-copy">
+        <text class="sheet-action-title">删除记录</text>
+        <text class="sheet-action-desc">同时删除服务器中的对应文件</text>
+      </view>
+      <view class="sheet-action-arrow"></view>
+    </button>
+
+    <button class="sheet-cancel" hover-class="sheet-action-pressed" bindtap="closeHistoryMenu">取消</button>
+    <view class="safe-bottom"></view>
+  </view>
+</view>

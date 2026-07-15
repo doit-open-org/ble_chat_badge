@@ -1,0 +1,29 @@
+{
+  "appid": "wx4d77c31d15d75460",
+  "compileType": "miniprogram",
+  "projectname": "sucai-ast-ui-v2",
+  "setting": {
+    "es6": true,
+    "postcss": true,
+    "minified": true,
+    "minifyWXML": true,
+    "enhance": true,
+    "uglifyFileName": false,
+    "urlCheck": false,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "condition": false
+  },
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
+  },
+  "condition": {}
+}

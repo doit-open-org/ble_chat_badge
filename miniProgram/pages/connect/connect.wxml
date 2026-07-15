@@ -1,0 +1,110 @@
+<view class="page-shell">
+  <view class="hero-card">
+    <view class="hero-orb hero-orb-one"></view>
+    <view class="hero-orb hero-orb-two"></view>
+
+    <view class="brand-row">
+      <view class="brand-box">
+        <image class="brand-logo" src="/assets/img/logo.png" mode="aspectFit"></image>
+      </view>
+      <view class="brand-copy">
+        <text class="brand-name">四博智联</text>
+        <text class="brand-en">DOIT DEVICE STUDIO</text>
+      </view>
+      <view class="scan-chip {{scanning ? 'scan-chip-active' : ''}}">
+        <view class="scan-dot"></view>
+        <text>{{scanning ? '扫描中' : '已暂停'}}</text>
+      </view>
+    </view>
+
+    <view class="hero-content">
+      <view class="hero-copy">
+        <text class="hero-title">连接显示设备</text>
+        <text class="hero-desc">请打开设备并靠近手机，点击下方设备即可进入内容管理。</text>
+      </view>
+
+      <view class="radar {{scanning ? 'radar-active' : ''}}">
+        <view class="radar-ring radar-ring-one"></view>
+        <view class="radar-ring radar-ring-two"></view>
+        <view class="device-visual">
+          <view class="device-screen"></view>
+          <view class="device-button"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="device-panel">
+    <view class="section-head">
+      <view class="section-copy">
+        <view class="section-title-row">
+          <text class="section-title">附近设备</text>
+          <text class="device-count">{{devicesList.length}}</text>
+        </view>
+        <text class="section-subtitle">{{scanText}}</text>
+      </view>
+      <button class="refresh-button" hover-class="refresh-button-pressed" bindtap="manualRefresh">
+        <view class="refresh-icon {{scanning ? 'refresh-icon-active' : ''}}">↻</view>
+        <text>刷新</text>
+      </button>
+    </view>
+
+    <scroll-view class="device-scroll" scroll-y="{{true}}" show-scrollbar="{{false}}">
+      <block wx:if="{{devicesList.length}}">
+        <view
+          wx:for="{{devicesList}}"
+          wx:key="deviceId"
+          class="device-card {{item.isConnect ? 'device-card-connected' : ''}}"
+          hover-class="device-card-pressed"
+          bindtap="connectDevice"
+          data-device-id="{{item.deviceId}}"
+          data-mac="{{item.mac}}"
+        >
+          <view class="device-avatar">
+            <view class="mini-device">
+              <view class="mini-screen"></view>
+              <view class="mini-button"></view>
+            </view>
+            <view class="online-dot"></view>
+          </view>
+
+          <view class="device-main">
+            <view class="device-name-row">
+              <text class="device-name">{{item.displayName}}</text>
+              <text wx:if="{{item.isConnect}}" class="connected-label">已连接</text>
+            </view>
+            <text class="device-id">{{item.displayMac}}</text>
+            <view class="signal-row {{item.signalClass}}">
+              <view class="signal-bars">
+                <view class="signal-bar"></view>
+                <view class="signal-bar"></view>
+                <view class="signal-bar"></view>
+                <view class="signal-bar"></view>
+              </view>
+              <text class="signal-copy">{{item.signalText}} · {{item.RSSI}} dBm</text>
+            </view>
+          </view>
+
+          <view class="device-action {{connectingId == item.deviceId ? 'device-action-loading' : ''}}">
+            <text>{{connectingId == item.deviceId ? '连接中' : (item.isConnect ? '进入' : '连接')}}</text>
+            <view wx:if="{{connectingId != item.deviceId}}" class="action-arrow"></view>
+            <view wx:else class="action-spinner"></view>
+          </view>
+        </view>
+      </block>
+
+      <view wx:else class="empty-state">
+        <view class="empty-radar {{scanning ? 'empty-radar-active' : ''}}">
+          <view class="empty-ring empty-ring-one"></view>
+          <view class="empty-ring empty-ring-two"></view>
+          <view class="empty-core"></view>
+        </view>
+        <text class="empty-title">{{scanning ? '正在寻找设备' : '没有发现可连接设备'}}</text>
+        <text class="empty-desc">请确认设备已开机、手机蓝牙已开启，并将设备放在手机附近。</text>
+        <button wx:if="{{!scanning}}" class="empty-button" bindtap="manualRefresh">重新扫描</button>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="safe-bottom"></view>
+</view>

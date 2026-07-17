@@ -10,7 +10,7 @@ Designed for makers, developers, educators, and AI hardware enthusiasts.
 
 ---
 
-# ✨ Features
+# Features
 
 - 🤖 AI Agent Integration
 - 💬 AI Voice Chat

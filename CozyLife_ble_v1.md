@@ -380,9 +380,3 @@ typedef struct {
 ## Device OTA Flow
 
 Based on the device and server versions, the app must display an upgrade prompt. Silent upgrades are not allowed.
-
-## Contact
-
-Email: lihonggang@doit.am
-
-![Contact](a31fa5dfeae11ed49fca984fb5f73fd1.jpg)

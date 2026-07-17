@@ -387,9 +387,3 @@ typedef struct {
 
 
 根据设备版本号以及服务器版本，在App端做出提醒，不允许静默升级。
-
-## 联系人
-
-邮箱:lihonggang@doit.am
-
-![联系人](a31fa5dfeae11ed49fca984fb5f73fd1.jpg)

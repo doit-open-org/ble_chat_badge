@@ -54,7 +54,6 @@ Designed for makers, developers, educators, and AI hardware enthusiasts.
 - TF Card
 - USB Type-C
 - Rechargeable Battery
-- RGB LED
 
 > Hardware specifications may vary across different versions.
 
@@ -64,22 +63,22 @@ Designed for makers, developers, educators, and AI hardware enthusiasts.
 
 ```
 ┌────────────────────────────┐
-│     WeChat Mini Program     │
+│     WeChat Mini Program    │
 └──────────────┬─────────────┘
                │ BLE
                ▼
 ┌────────────────────────────┐
-│       Ble Chat Badge        │
+│       Ble Chat Badge       │
 ├────────────────────────────┤
-│ UI                          │
-│ BLE Service                 │
-│ Media Manager               │
-│ AI Assistant                │
-│ Audio Player                │
-│ Image Decoder               │
-│ GIF Player                  │
-│ Video Player                │
-│ Storage Manager             │
+│ UI                         │
+│ BLE Service                │
+│ Media Manager              │
+│ AI Assistant               │
+│ Audio Player               │
+│ Image Decoder              │
+│ GIF Player                 │
+│ Video Player               │
+│ Storage Manager            │
 └────────────────────────────┘
 ```
 
@@ -102,34 +101,6 @@ Supports:
 
 ---
 
-# Getting Started
-
-## Clone
-
-```bash
-git clone https://github.com/doit-open-org/esp32s3_chat_badge.git
-```
-
-## Install ESP-IDF
-
-Recommended:
-
-- ESP-IDF v5.x
-
-## Build
-
-```bash
-idf.py build
-```
-
-## Flash
-
-```bash
-idf.py flash monitor
-```
-
----
-
 # Mobile Application
 
 Using the WeChat Mini Program, you can:
@@ -142,33 +113,6 @@ Using the WeChat Mini Program, you can:
 - Upload Music
 - Manage AI Agents
 - Configure Device Settings
-
----
-
-# Repository Structure
-
-```
-.
-├── docs/
-├── firmware/
-├── hardware/
-├── tools/
-├── examples/
-└── README.md
-```
-
----
-
-# Roadmap
-
-- [ ] BLE OTA
-- [ ] Wi-Fi OTA
-- [ ] More AI Providers
-- [ ] MQTT
-- [ ] Matter
-- [ ] Home Assistant
-- [ ] Plugin SDK
-- [ ] Custom App SDK
 
 ---
 
@@ -190,4 +134,4 @@ WeChat：
 
 GitHub
 
-https://github.com/doit-open-org/esp32s3_chat_badge
+https://github.com/doit-open-org/ble_chat_badge

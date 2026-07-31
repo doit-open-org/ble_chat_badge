@@ -33,14 +33,14 @@
 
 ## 应用场景
 
-- AI Companion
-- AI Badge
-- AI Wearable
-- Smart Desk Gadget
-- Developer Platform
-- Exhibition Badge
-- Education
-- BLE Display Terminal
+- AI 伴侣
+- AI 徽章
+- AI 穿戴设备
+- 智能桌面小物
+- 开发者平台
+- 展会徽章
+- 教育场景
+- BLE 显示终端
 
 ---
 
@@ -54,7 +54,6 @@
 - TF Card
 - USB Type-C
 - 锂电池
-- RGB 灯
 
 > 不同硬件版本可能略有差异。
 
@@ -62,26 +61,37 @@
 
 ## 软件架构
 
-```
-┌────────────────────────────┐
-│      WeChat Mini Program    │
-└──────────────┬─────────────┘
-               │ BLE
-               ▼
-┌────────────────────────────┐
-│       Ble Chat Badge        │
-├────────────────────────────┤
-│ UI                          │
-│ BLE Service                 │
-│ Media Manager               │
-│ AI Assistant                │
-│ Audio Player                │
-│ Image Decoder               │
-│ GIF Player                  │
-│ Video Player                │
-│ Storage Manager             │
-└────────────────────────────┘
-```
+<div style="width: 360px; max-width: 60%;">
+  <table style="width: 40%; margin: 0;">
+    <tr>
+      <th style="text-align: center; width: 100%;" align="center">微信小程序</th>
+    </tr>
+  </table>
+
+  <div style="text-align: center; line-height: 1.3;width: 40%;">
+    BLE<br>
+    ▼
+  </div>
+
+  <table style="width: 40%; margin: 0;">
+    <tr>
+      <th style="text-align: center; width: 100%;" align="center">电子吧唧</th>
+    </tr>
+    <tr>
+      <td style="text-align: center; width: 100%;">
+        界面<br>
+        BLE 服务<br>
+        媒体管理<br>
+        AI 助手模块<br>
+        音频播放<br>
+        图片解码<br>
+        GIF 播放<br>
+        视频播放<br>
+        存储管理
+      </td>
+    </tr>
+  </table>
+</div>
 
 ---
 
@@ -102,34 +112,6 @@
 
 ---
 
-## 快速开始
-
-### 1. 克隆仓库
-
-```bash
-git clone https://github.com/doit-open-org/esp32s3_chat_badge.git
-```
-
-### 2. 安装 ESP-IDF
-
-建议：
-
-- ESP-IDF v5.x
-
-### 3. 编译
-
-```bash
-idf.py build
-```
-
-### 4. 烧录
-
-```bash
-idf.py flash monitor
-```
-
----
-
 ## 手机端
 
 通过微信小程序可完成：
@@ -144,34 +126,6 @@ idf.py flash monitor
 - 设备设置
 
 ---
-
-## 项目目录
-
-```
-.
-├── docs/
-├── firmware/
-├── hardware/
-├── tools/
-├── examples/
-└── README.md
-```
-
----
-
-## Roadmap
-
-- [ ] BLE OTA
-- [ ] Wi-Fi OTA
-- [ ] 更多 AI Provider
-- [ ] MQTT
-- [ ] Matter
-- [ ] Home Assistant
-- [ ] Plugin SDK
-- [ ] Custom App SDK
-
----
-
 
 ## License
 
@@ -191,4 +145,4 @@ MIT License
 
 GitHub：
 
-https://github.com/doit-open-org/esp32s3_chat_badge
+https://github.com/doit-open-org/ble_chat_badge

@@ -2,7 +2,7 @@
 
 [中文](README_zh.md)
 
-An open-source smart badge powered by ESP32, featuring BLE communication, AI interaction, image/GIF/video playback, Bluetooth speaker, MP3 player, and extensible application development.
+An open-source smart badge powered by JL7014, featuring BLE communication, AI interaction, image/GIF/video playback, Bluetooth speaker, MP3 player, and extensible application development.
 
 Designed for makers, developers, educators, and AI hardware enthusiasts.
 
@@ -46,9 +46,8 @@ Designed for makers, developers, educators, and AI hardware enthusiasts.
 
 # Hardware
 
-- ESP32 Series MCU
+- JL7014
 - Color Display
-- Bluetooth Low Energy
 - Speaker
 - Microphone
 - TF Card
